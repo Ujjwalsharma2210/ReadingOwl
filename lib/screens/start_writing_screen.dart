@@ -27,17 +27,8 @@ class _StartWritingScreenState extends State<StartWritingScreen> {
   FirebaseFirestore firestoreInstance = FirebaseFirestore.instance;
 
   late String username;
-
-  Future createBlog(Blog blog) async {
-    final dbRef = firestoreInstance
-        .collection('blogs')
-        .doc(firebaseAuthInstance.currentUser!.uid.toString());
-    // FirebaseFirestore.instance.collection('unReviewedBlogs').doc(FirebaseAuth.instance.currentUser.toString());
-
-    blog.id = dbRef.id;
-    final json = blog.toJson();
-    await dbRef.set(json);
-  }
+  late String selectedGenre;
+  String selectGenreHint = 'Select genre';
 
   @override
   void initState() {
@@ -58,16 +49,29 @@ class _StartWritingScreenState extends State<StartWritingScreen> {
     );
   }
 
+  Future createBlog(Blog blog) async {
+    final dbRef = firestoreInstance
+        .collection('blogs')
+        .doc(firebaseAuthInstance.currentUser!.uid.toString());
+    // FirebaseFirestore.instance.collection('unReviewedBlogs').doc(FirebaseAuth.instance.currentUser.toString());
+
+    blog.id = dbRef.id;
+    final json = blog.toJson();
+    await dbRef.set(json);
+  }
+
   @override
   Widget build(BuildContext context) {
-    String selectedGenre = 'Other';
-
     return Scaffold(
       backgroundColor: Colors.black,
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: ListView(
           children: [
+            TitleText(context, 'Publish your story'),
+            SizedBox(
+              height: 70,
+            ),
             TextInputField(context, titleController, 'Enter title'),
             TextInputField(context, contentController, 'Enter content'),
             Padding(
@@ -81,7 +85,7 @@ class _StartWritingScreenState extends State<StartWritingScreen> {
                   hint: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      'Select genre',
+                      selectGenreHint,
                       style: TextStyle(color: textColor, fontSize: fontSize),
                     ),
                   ),
@@ -102,6 +106,7 @@ class _StartWritingScreenState extends State<StartWritingScreen> {
                   onChanged: (String? newValue) {
                     setState(() {
                       selectedGenre = newValue!;
+                      selectGenreHint = newValue;
                     });
                   },
                 ),

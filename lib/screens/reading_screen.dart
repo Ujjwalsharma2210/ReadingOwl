@@ -1,21 +1,13 @@
 import 'package:flutter/material.dart';
 
-Color black = Colors.black;
-Color darkGrey = Colors.grey.withOpacity(0.13);
-Color textColor = Colors.grey.shade500;
-Color primaryColor = Colors.deepPurple;
-Color grey = Colors.grey.shade800;
-Color white = Colors.white;
+import '../res/data_structures.dart';
+import 'package:reading_owl/res/colors.dart';
 
 class ReadingScreen extends StatelessWidget {
-  final String title;
-  final String content;
-  final String? author;
+  final Blog blog;
   const ReadingScreen({
     super.key,
-    required this.title,
-    required this.content,
-    this.author,
+    required this.blog,
   });
 
   @override
@@ -27,7 +19,7 @@ class ReadingScreen extends StatelessWidget {
         child: ListView(
           children: [
             Text(
-              title,
+              blog.title,
               style: TextStyle(
                 color: textColor,
                 fontSize: 25,
@@ -38,21 +30,43 @@ class ReadingScreen extends StatelessWidget {
               color: textColor,
             ),
             Text(
-              content,
+              blog.content,
               style: TextStyle(
                 color: textColor,
-                fontSize: 20,
+                fontSize: 18,
               ),
             ),
             Divider(
               color: textColor,
             ),
-            Text(
-              'Written by ' + author!,
-              style: TextStyle(
-                color: textColor,
-                fontSize: 20,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  'By ${blog.author}',
+                  style: TextStyle(
+                    color: textColor,
+                    fontSize: 18,
+                  ),
+                ),
+                const SizedBox(
+                  width: 25,
+                ),
+                Icon(
+                  Icons.remove_red_eye_sharp,
+                  color: textColor,
+                ),
+                const SizedBox(
+                  width: 5,
+                ),
+                Text(
+                  blog.reads.toString(),
+                  style: TextStyle(
+                    color: textColor,
+                    fontSize: 14,
+                  ),
+                ),
+              ],
             ),
           ],
         ),

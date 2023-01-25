@@ -35,3 +35,13 @@ class Blog {
       reads: json['reads'],
       isVerified: json['isVerified']);
 }
+
+class Issue {
+  final String issueDescription;
+
+  Issue({required this.issueDescription});
+
+  Map<String, dynamic> toJson() => {
+        'issue': issueDescription,
+      };
+}

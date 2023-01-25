@@ -150,7 +150,7 @@ class _SignupScreenState extends State<SignupScreen> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
-                  onPressed: signup,
+                  onPressed: verifyCredentials,
                   child: Text(
                     'Signup',
                     style: TextStyle(
@@ -164,5 +164,25 @@ class _SignupScreenState extends State<SignupScreen> {
         ),
       ),
     );
+  }
+
+  void verifyCredentials() {
+    if (confirmPasswordController.text.trim() == '' ||
+        emailController.text.trim() == '' ||
+        passwordController.text.trim() == '' ||
+        confirmPasswordController.text.trim() == '' ||
+        selectedItems.isEmpty) {
+      showToast(context, '''Field(s) can't be empty''', 'alert');
+      return;
+    } else if (passwordController.text.trim() !=
+        confirmPasswordController.text.toString()) {
+      showToast(context, '''passwords don't match''', 'alert');
+      return;
+    } else if (passwordController.text.trim().length < 6) {
+      showToast(context, 'password too short', 'alert');
+      return;
+    } else {
+      signup();
+    }
   }
 }

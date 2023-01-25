@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
-
-Color black = Colors.black;
-Color darkGrey = Color.fromARGB(255, 23, 23, 23);
-Color textColor = Colors.grey.shade500;
-Color primaryColor = Colors.deepPurple;
-Color grey = Colors.grey.shade900;
+import 'package:reading_owl/res/colors.dart';
 
 double? fontSize = 16;
 
@@ -41,6 +36,32 @@ Widget OwlImage(BuildContext context) {
   );
 }
 
+Widget CategoryItem(
+    BuildContext context, String title, Function categoryTapped) {
+  return Padding(
+    padding: const EdgeInsets.only(right: 15),
+    child: GestureDetector(
+      onTap: () => categoryTapped,
+      child: Container(
+        width: 100,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(borderRadius),
+          color: darkGrey,
+        ),
+        child: Center(
+          child: Text(
+            title,
+            style: TextStyle(
+              color: textColor,
+              fontSize: 20,
+            ),
+          ),
+        ),
+      ),
+    ),
+  );
+}
+
 Widget TextInputField(
     BuildContext context, TextEditingController controller, String hintText) {
   Color textColor = Colors.grey.shade500;
@@ -52,7 +73,7 @@ Widget TextInputField(
             borderRadius: BorderRadius.circular(borderRadius), color: darkGrey),
         child: TextField(
           minLines: 1,
-          maxLines: 8,
+          maxLines: 15,
           controller: controller,
           style: TextStyle(color: textColor),
           decoration: InputDecoration(
@@ -76,7 +97,7 @@ Widget TitleText(BuildContext context, String pageHeading) {
           style: TextStyle(
             color: grey,
             fontSize: 35,
-            fontWeight: FontWeight.w400,
+            fontWeight: FontWeight.w700,
           ),
         ),
       ],

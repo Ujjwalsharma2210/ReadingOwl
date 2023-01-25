@@ -46,7 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
           child: ListView(
             children: [
               SizedBox(
-                height: height * 0.1,
+                height: height * 0.08,
               ),
               TitleText(context, 'Welcome to Reading Owl'),
               Center(
@@ -105,7 +105,17 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: const Text('Signup Now'),
                   ),
                 ],
-              )
+              ),
+              SizedBox(
+                height: 70,
+              ),
+              Text(
+                '* We are still developing and testing this app. \nPlease consider helping us improve the application by reporting errors.',
+                style: TextStyle(
+                  color: textColor,
+                  fontSize: 16,
+                ),
+              ),
             ],
           ),
         ),

@@ -1,8 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:reading_owl/screens/reading_screen.dart';
 
 import '../res/custom_widgets.dart';
 import '../res/data_structures.dart';
+
+import 'package:reading_owl/res/colors.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -19,69 +22,73 @@ class _HomePageState extends State<HomePage> {
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-      child: Container(
-        width: width * 0.95,
-        // height: height * 0.2,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(borderRadius),
-          color: darkGrey,
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                blog.title,
-                style: TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.w500,
-                    color: textColor),
-              ),
-              Divider(
-                color: textColor,
-              ),
-              Text(
-                blog.content,
-                style: TextStyle(color: textColor, fontSize: 17),
-                maxLines: 5,
-              ),
-              Text(
-                'continue reading',
-                style: TextStyle(
-                  color: Colors.blue,
+      child: GestureDetector(
+        onTap: () => Navigator.push(context,
+            MaterialPageRoute(builder: (context) => ReadingScreen(blog: blog))),
+        child: Container(
+          width: width * 0.95,
+          // height: height * 0.2,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(borderRadius),
+            color: darkGrey,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  blog.title,
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                      color: textColor),
                 ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Text(
-                    'By ${blog.author}',
-                    style: TextStyle(
-                      color: textColor,
-                      fontSize: 14,
+                Divider(
+                  color: textColor,
+                ),
+                Text(
+                  blog.content,
+                  style: TextStyle(color: textColor, fontSize: 17),
+                  maxLines: 5,
+                ),
+                const Text(
+                  'more',
+                  style: TextStyle(
+                    color: Colors.blue,
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      'By ${blog.author}',
+                      style: TextStyle(
+                        color: textColor,
+                        fontSize: 14,
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    width: 25,
-                  ),
-                  Icon(
-                    Icons.remove_red_eye_sharp,
-                    color: textColor,
-                  ),
-                  const SizedBox(
-                    width: 5,
-                  ),
-                  Text(
-                    blog.reads.toString(),
-                    style: TextStyle(
-                      color: textColor,
-                      fontSize: 14,
+                    const SizedBox(
+                      width: 25,
                     ),
-                  ),
-                ],
-              ),
-            ],
+                    Icon(
+                      Icons.remove_red_eye_sharp,
+                      color: textColor,
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      blog.reads.toString(),
+                      style: TextStyle(
+                        color: textColor,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

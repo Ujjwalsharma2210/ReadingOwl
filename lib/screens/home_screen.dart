@@ -1,8 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:reading_owl/res/custom_widgets.dart';
 import 'package:reading_owl/tabs/home_page.dart';
 import 'package:reading_owl/tabs/library_page.dart';
+import 'package:reading_owl/res/colors.dart';
+
+import '../res/custom_widgets.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -11,7 +14,7 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-Widget SideDrawer(BuildContext context, String username) {
+Widget SideDrawer(BuildContext context, String email) {
   return Drawer(
     backgroundColor: darkGrey,
     child: ListView(
@@ -28,10 +31,10 @@ Widget SideDrawer(BuildContext context, String username) {
                 ),
               ),
               Text(
-                username,
+                email,
                 style: const TextStyle(
                   color: Colors.white,
-                  fontSize: 22,
+                  fontSize: 18,
                 ),
               )
             ],
@@ -52,6 +55,16 @@ Widget SideDrawer(BuildContext context, String username) {
         ),
         ListTile(
           title: Text(
+            'Report problem',
+            style: TextStyle(
+              color: textColor,
+              fontSize: 18,
+            ),
+          ),
+          onTap: () => Navigator.pushNamed(context, '/IssueReportScreen'),
+        ),
+        ListTile(
+          title: Text(
             'Logout',
             style: TextStyle(
               color: textColor,
@@ -68,16 +81,19 @@ Widget SideDrawer(BuildContext context, String username) {
 class _HomeScreenState extends State<HomeScreen> {
   var scaffoldKey = GlobalKey<ScaffoldState>();
 
-  var username = FirebaseAuth.instance.currentUser?.email.toString();
+  FirebaseAuth firebaseAuthInstance = FirebaseAuth.instance;
+  FirebaseFirestore firestoreInstance = FirebaseFirestore.instance;
+  late String email;
 
   final tabs = [const HomePage(), const LibraryPage()];
   int currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
+    email = firebaseAuthInstance.currentUser!.email.toString();
     return Scaffold(
       backgroundColor: black,
-      drawer: SideDrawer(context, username!),
+      drawer: SideDrawer(context, email),
       appBar: AppBar(
         title: Text(
           'Reading Owl',
