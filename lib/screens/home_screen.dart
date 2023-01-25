@@ -46,7 +46,7 @@ Widget SideDrawer(BuildContext context, String username) {
             'Start writing',
             style: TextStyle(
               color: textColor,
-              fontSize: 20,
+              fontSize: 18,
             ),
           ),
         ),
@@ -55,7 +55,7 @@ Widget SideDrawer(BuildContext context, String username) {
             'Logout',
             style: TextStyle(
               color: textColor,
-              fontSize: 20,
+              fontSize: 18,
             ),
           ),
           onTap: () => FirebaseAuth.instance.signOut(),

@@ -5,6 +5,7 @@ class Blog {
   final String content;
   final String author;
   final String genre;
+  bool isVerified;
 
   Blog({
     this.id = '',
@@ -13,6 +14,7 @@ class Blog {
     required this.content,
     required this.author,
     required this.genre,
+    this.isVerified = false,
   });
 
   Map<String, dynamic> toJson() => {
@@ -22,6 +24,7 @@ class Blog {
         'author': author,
         'reads': reads,
         'genre': genre,
+        'isVerified': isVerified,
       };
 
   static Blog fromJson(Map<String, dynamic> json) => Blog(
@@ -29,5 +32,6 @@ class Blog {
       content: json['content'],
       author: json['author'],
       genre: json['genre'],
-      reads: json['reads']);
+      reads: json['reads'],
+      isVerified: json['isVerified']);
 }

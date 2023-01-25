@@ -14,9 +14,12 @@ class _LibraryPageState extends State<LibraryPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text(
-        'Library',
-        style: TextStyle(color: textColor, fontSize: 30),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+        child: Text(
+          'Library',
+          style: TextStyle(color: textColor, fontSize: 30),
+        ),
       ),
     );
   }

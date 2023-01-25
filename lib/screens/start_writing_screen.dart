@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:reading_owl/res/custom_widgets.dart';
 
-import '../res/custom_widgets.dart';
 import '../res/data_structures.dart';
 
 Color black = Colors.black;
@@ -22,15 +22,40 @@ class StartWritingScreen extends StatefulWidget {
 class _StartWritingScreenState extends State<StartWritingScreen> {
   TextEditingController titleController = TextEditingController();
   TextEditingController contentController = TextEditingController();
-  TextEditingController authorController = TextEditingController();
+
+  FirebaseAuth firebaseAuthInstance = FirebaseAuth.instance;
+  FirebaseFirestore firestoreInstance = FirebaseFirestore.instance;
+
+  late String username;
 
   Future createBlog(Blog blog) async {
-    final dbRef =
-        FirebaseFirestore.instance.collection('unReviewedBlogs').doc();
+    final dbRef = firestoreInstance
+        .collection('blogs')
+        .doc(firebaseAuthInstance.currentUser!.uid.toString());
+    // FirebaseFirestore.instance.collection('unReviewedBlogs').doc(FirebaseAuth.instance.currentUser.toString());
 
     blog.id = dbRef.id;
     final json = blog.toJson();
     await dbRef.set(json);
+  }
+
+  @override
+  void initState() {
+    getUsername();
+    super.initState();
+  }
+
+  Future getUsername() async {
+    final dbRef = firestoreInstance
+        .collection('users')
+        .doc(firebaseAuthInstance.currentUser!.uid);
+    dbRef.get().then(
+      (DocumentSnapshot doc) {
+        final data = doc.data() as Map<String, dynamic>;
+        username = data['username'];
+      },
+      onError: (e) => showToast(context, 'Cant get username', 'error'),
+    );
   }
 
   @override
@@ -45,32 +70,6 @@ class _StartWritingScreenState extends State<StartWritingScreen> {
           children: [
             TextInputField(context, titleController, 'Enter title'),
             TextInputField(context, contentController, 'Enter content'),
-            TextInputField(context, authorController, 'Enter your name'),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-              child: ElevatedButton(
-                child: const Padding(
-                  padding: EdgeInsets.all(10.0),
-                  child: Text(
-                    'Send for review',
-                    style: TextStyle(
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
-                onPressed: () {
-                  final blog = Blog(
-                      title: titleController.text,
-                      content: contentController.text,
-                      author: authorController.text,
-                      genre: selectedGenre);
-                  createBlog(blog);
-                  showToast(
-                      context, 'Sent for review suuccessfully.', 'success');
-                  Navigator.pop(context);
-                },
-              ),
-            ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
@@ -106,6 +105,34 @@ class _StartWritingScreenState extends State<StartWritingScreen> {
                     });
                   },
                 ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              child: ElevatedButton(
+                child: const Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Text(
+                    'Send for review',
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
+                onPressed: () {
+                  final blog = Blog(
+                      title: titleController.text,
+                      content: contentController.text,
+                      author: username,
+                      genre: selectedGenre);
+                  createBlog(blog);
+                  titleController.clear;
+                  contentController.clear;
+
+                  showToast(
+                      context, 'Sent for review suuccessfully.', 'success');
+                  Navigator.pop(context);
+                },
               ),
             ),
           ],
