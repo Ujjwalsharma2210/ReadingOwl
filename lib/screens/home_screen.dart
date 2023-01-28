@@ -1,11 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:reading_owl/tabs/home_page.dart';
 import 'package:reading_owl/tabs/library_page.dart';
 import 'package:reading_owl/res/colors.dart';
-
-import '../res/custom_widgets.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -82,11 +79,17 @@ class _HomeScreenState extends State<HomeScreen> {
   var scaffoldKey = GlobalKey<ScaffoldState>();
 
   FirebaseAuth firebaseAuthInstance = FirebaseAuth.instance;
-  FirebaseFirestore firestoreInstance = FirebaseFirestore.instance;
+  // FirebaseFirestore firestoreInstance = FirebaseFirestore.instance;
   late String email;
 
   final tabs = [const HomePage(), const LibraryPage()];
   int currentIndex = 0;
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -111,9 +114,9 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: black,
         height: 70,
         onDestinationSelected: (int index) {
-          setState(() {
-            currentIndex = index;
-          });
+          // setState(() {
+          //   currentIndex = index;
+          // });
         },
         selectedIndex: currentIndex,
         destinations: <Widget>[

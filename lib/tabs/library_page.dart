@@ -53,6 +53,17 @@ class _LibraryPageState extends State<LibraryPage> {
                 ),
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              child: Text(
+                'Work in progress',
+                style: TextStyle(
+                  color: textColor,
+                  fontSize: 35,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
           ],
         ),
       ),

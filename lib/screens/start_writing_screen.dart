@@ -27,7 +27,8 @@ class _StartWritingScreenState extends State<StartWritingScreen> {
   FirebaseFirestore firestoreInstance = FirebaseFirestore.instance;
 
   late String username;
-  late String selectedGenre;
+  String selectedGenre = '';
+  // late var dbref;
   String selectGenreHint = 'Select genre';
 
   @override
@@ -49,15 +50,12 @@ class _StartWritingScreenState extends State<StartWritingScreen> {
     );
   }
 
-  Future createBlog(Blog blog) async {
-    final dbRef = firestoreInstance
-        .collection('blogs')
-        .doc(firebaseAuthInstance.currentUser!.uid.toString());
+  Future createBlog(Blog blog, var dbRef) async {
     // FirebaseFirestore.instance.collection('unReviewedBlogs').doc(FirebaseAuth.instance.currentUser.toString());
 
-    blog.id = dbRef.id;
     final json = blog.toJson();
-    await dbRef.set(json);
+    await dbRef.set(json).onError(
+        (error, stackTrace) => showToast(context, error.toString(), 'error'));
   }
 
   @override
@@ -69,7 +67,7 @@ class _StartWritingScreenState extends State<StartWritingScreen> {
         child: ListView(
           children: [
             TitleText(context, 'Publish your story'),
-            SizedBox(
+            const SizedBox(
               height: 70,
             ),
             TextInputField(context, titleController, 'Enter title'),
@@ -125,12 +123,8 @@ class _StartWritingScreenState extends State<StartWritingScreen> {
                   ),
                 ),
                 onPressed: () {
-                  final blog = Blog(
-                      title: titleController.text,
-                      content: contentController.text,
-                      author: username,
-                      genre: selectedGenre);
-                  createBlog(blog);
+                  // createBlog(blog);
+                  verifyBlog();
                   titleController.clear;
                   contentController.clear;
 
@@ -144,5 +138,23 @@ class _StartWritingScreenState extends State<StartWritingScreen> {
         ),
       ),
     );
+  }
+
+  void verifyBlog() {
+    final dbRef = firestoreInstance.collection('blogs').doc();
+    final blog = Blog(
+        id: dbRef.id,
+        title: titleController.text,
+        content: contentController.text,
+        author: username,
+        genre: selectedGenre);
+    if (titleController.text.trim().isEmpty ||
+        contentController.text.trim().isEmpty) {
+      showToast(context, '''Feild(s) can't be empty''', 'alert');
+    } else if (selectedGenre == '') {
+      showToast(context, 'Select a genre', 'alert');
+    } else {
+      createBlog(blog, dbRef);
+    }
   }
 }

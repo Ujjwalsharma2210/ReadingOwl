@@ -1,6 +1,6 @@
 class Blog {
-  String id;
-  dynamic reads;
+  final String id;
+  int reads;
   final String title;
   final String content;
   final String author;
@@ -8,7 +8,7 @@ class Blog {
   bool isVerified;
 
   Blog({
-    this.id = '',
+    required this.id,
     this.reads = 0,
     required this.title,
     required this.content,
@@ -28,6 +28,7 @@ class Blog {
       };
 
   static Blog fromJson(Map<String, dynamic> json) => Blog(
+      id: json['id'],
       title: json['title'],
       content: json['content'],
       author: json['author'],

@@ -23,15 +23,9 @@ class DefaultFirebaseOptions {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -50,22 +44,40 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDHIXoZUZVQvO65ldn-lgBZDCTcuqBNEy8',
-    appId: '1:560400509256:web:4a192d97956e808538ab7d',
-    messagingSenderId: '560400509256',
-    projectId: 'readingowl-ff5fa',
-    authDomain: 'readingowl-ff5fa.firebaseapp.com',
-    databaseURL: 'https://readingowl-ff5fa-default-rtdb.firebaseio.com',
-    storageBucket: 'readingowl-ff5fa.appspot.com',
-    measurementId: 'G-E9CVJL8JTD',
+    apiKey: 'AIzaSyDiHyGktG7D2yaywHkILMReCQg35xQ5J1c',
+    appId: '1:172898981582:web:796cf00d4475b875c5229f',
+    messagingSenderId: '172898981582',
+    projectId: 'readingowl-v1-0',
+    authDomain: 'readingowl-v1-0.firebaseapp.com',
+    storageBucket: 'readingowl-v1-0.appspot.com',
+    measurementId: 'G-BWBQMDS2CC',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyA3tEOsURXpo1KRPAKgEBPxu-K9Wk7jMVM',
-    appId: '1:560400509256:android:0ea8a95dd4d02c1038ab7d',
-    messagingSenderId: '560400509256',
-    projectId: 'readingowl-ff5fa',
-    databaseURL: 'https://readingowl-ff5fa-default-rtdb.firebaseio.com',
-    storageBucket: 'readingowl-ff5fa.appspot.com',
+    apiKey: 'AIzaSyB4CHoOJrym7-NqjDPugHUZ7Vund47NNiY',
+    appId: '1:172898981582:android:9a63b01208079435c5229f',
+    messagingSenderId: '172898981582',
+    projectId: 'readingowl-v1-0',
+    storageBucket: 'readingowl-v1-0.appspot.com',
+  );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyD9Iz7Mui_0gM60SGh9C5T3CsLCkIWCAEM',
+    appId: '1:172898981582:ios:e445bc511073708ac5229f',
+    messagingSenderId: '172898981582',
+    projectId: 'readingowl-v1-0',
+    storageBucket: 'readingowl-v1-0.appspot.com',
+    iosClientId: '172898981582-pjk7hsj3dqs82pkafivoq7semd8plt56.apps.googleusercontent.com',
+    iosBundleId: 'com.example.readingOwl',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyD9Iz7Mui_0gM60SGh9C5T3CsLCkIWCAEM',
+    appId: '1:172898981582:ios:e445bc511073708ac5229f',
+    messagingSenderId: '172898981582',
+    projectId: 'readingowl-v1-0',
+    storageBucket: 'readingowl-v1-0.appspot.com',
+    iosClientId: '172898981582-pjk7hsj3dqs82pkafivoq7semd8plt56.apps.googleusercontent.com',
+    iosBundleId: 'com.example.readingOwl',
   );
 }
