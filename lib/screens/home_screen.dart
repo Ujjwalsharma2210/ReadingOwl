@@ -3,76 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:reading_owl/tabs/home_page.dart';
 import 'package:reading_owl/tabs/library_page.dart';
 import 'package:reading_owl/res/colors.dart';
+import 'package:reading_owl/tabs/your_stories.dart';
+
+import '../res/side_drawer.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
-}
-
-Widget SideDrawer(BuildContext context, String email) {
-  return Drawer(
-    backgroundColor: darkGrey,
-    child: ListView(
-      children: [
-        DrawerHeader(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Signed In as',
-                style: TextStyle(
-                  fontSize: 18,
-                  color: textColor,
-                ),
-              ),
-              Text(
-                email,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                ),
-              )
-            ],
-          ),
-        ),
-        Divider(
-          color: textColor,
-        ),
-        ListTile(
-          onTap: () => Navigator.pushNamed(context, '/StartWritingScreen'),
-          title: Text(
-            'Start writing',
-            style: TextStyle(
-              color: textColor,
-              fontSize: 18,
-            ),
-          ),
-        ),
-        ListTile(
-          title: Text(
-            'Report problem',
-            style: TextStyle(
-              color: textColor,
-              fontSize: 18,
-            ),
-          ),
-          onTap: () => Navigator.pushNamed(context, '/IssueReportScreen'),
-        ),
-        ListTile(
-          title: Text(
-            'Logout',
-            style: TextStyle(
-              color: textColor,
-              fontSize: 18,
-            ),
-          ),
-          onTap: () => FirebaseAuth.instance.signOut(),
-        ),
-      ],
-    ),
-  );
 }
 
 class _HomeScreenState extends State<HomeScreen> {
@@ -82,14 +21,8 @@ class _HomeScreenState extends State<HomeScreen> {
   // FirebaseFirestore firestoreInstance = FirebaseFirestore.instance;
   late String email;
 
-  final tabs = [const HomePage(), const LibraryPage()];
+  final tabs = [const HomePage(), const LibraryPage(), const YourStories()];
   int currentIndex = 0;
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -103,20 +36,15 @@ class _HomeScreenState extends State<HomeScreen> {
           style: TextStyle(color: textColor, fontSize: 25),
         ),
         backgroundColor: black,
-        // leading: Padding(
-        //   padding: const EdgeInsets.fromLTRB(15, 10, 10, 10),
-        //   child: OwlImage(context),
-        // ),
-        // toolbarHeight: 70,
       ),
       body: tabs[currentIndex],
       bottomNavigationBar: NavigationBar(
         backgroundColor: black,
         height: 70,
         onDestinationSelected: (int index) {
-          // setState(() {
-          //   currentIndex = index;
-          // });
+          setState(() {
+            currentIndex = index;
+          });
         },
         selectedIndex: currentIndex,
         destinations: <Widget>[
@@ -141,6 +69,17 @@ class _HomeScreenState extends State<HomeScreen> {
               color: textColor,
             ),
             label: 'Library',
+          ),
+          NavigationDestination(
+            selectedIcon: Icon(
+              Icons.person,
+              color: textColor,
+            ),
+            icon: Icon(
+              Icons.person_outline,
+              color: textColor,
+            ),
+            label: 'By You',
           ),
         ],
       ),

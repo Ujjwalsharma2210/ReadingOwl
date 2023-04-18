@@ -66,7 +66,7 @@ class _ReadingScreenState extends State<ReadingScreen> {
               widget.blog.content,
               style: TextStyle(
                 color: textColor,
-                fontSize: 18,
+                fontSize: 20,
               ),
             ),
             Divider(

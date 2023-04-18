@@ -39,21 +39,25 @@ Widget OwlImage(BuildContext context) {
 Widget CategoryItem(
     BuildContext context, String title, Function categoryTapped) {
   return Padding(
-    padding: const EdgeInsets.only(right: 15),
+    padding: const EdgeInsets.only(bottom: 20, left: 10, right: 10),
     child: GestureDetector(
       onTap: () => categoryTapped,
       child: Container(
-        width: 100,
+        // width: 100,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(borderRadius),
           color: darkGrey,
         ),
-        child: Center(
-          child: Text(
-            title,
-            style: TextStyle(
-              color: textColor,
-              fontSize: 20,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+          child: Center(
+            child: Text(
+              title,
+              style: TextStyle(
+                color: textColor,
+                fontSize: 25,
+                fontWeight: FontWeight.w500,
+              ),
             ),
           ),
         ),
@@ -87,20 +91,17 @@ Widget TextInputField(
 
 Widget TitleText(BuildContext context, String pageHeading) {
   Color grey = Colors.grey.shade500;
-  return Container(
-    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-    child: Column(
-      children: [
-        // Divider(color: grey,),
-        Text(
-          pageHeading,
-          style: TextStyle(
-            color: grey,
-            fontSize: 35,
-            fontWeight: FontWeight.w700,
-          ),
+  return Center(
+    child: Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Text(
+        pageHeading,
+        style: TextStyle(
+          color: grey,
+          fontSize: 38,
+          fontWeight: FontWeight.w600,
         ),
-      ],
+      ),
     ),
   );
 }

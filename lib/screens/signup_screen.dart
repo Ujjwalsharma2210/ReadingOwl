@@ -39,6 +39,7 @@ class _SignupScreenState extends State<SignupScreen> {
       'email': emailController.text.trim(),
       'isVerifiedWriter': false,
       'interests': selectedItems,
+      'yourBlogs': [],
     };
 
     await dbRef.set(json);

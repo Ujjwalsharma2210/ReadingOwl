@@ -5,17 +5,18 @@ class Blog {
   final String content;
   final String author;
   final String genre;
-  bool isVerified;
+  var isVerified = false;
+  int score;
 
-  Blog({
-    required this.id,
-    this.reads = 0,
-    required this.title,
-    required this.content,
-    required this.author,
-    required this.genre,
-    this.isVerified = false,
-  });
+  Blog(
+      {required this.id,
+      this.reads = 0,
+      required this.title,
+      required this.content,
+      required this.author,
+      required this.genre,
+      required this.isVerified,
+      this.score = 1400});
 
   Map<String, dynamic> toJson() => {
         'id': id,
@@ -28,13 +29,14 @@ class Blog {
       };
 
   static Blog fromJson(Map<String, dynamic> json) => Blog(
-      id: json['id'],
-      title: json['title'],
-      content: json['content'],
-      author: json['author'],
-      genre: json['genre'],
-      reads: json['reads'],
-      isVerified: json['isVerified']);
+        id: json['id'],
+        title: json['title'],
+        content: json['content'],
+        author: json['author'],
+        genre: json['genre'],
+        reads: json['reads'],
+        isVerified: json['isVerified'],
+      );
 }
 
 class Issue {

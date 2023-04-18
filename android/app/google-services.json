@@ -1,0 +1,83 @@
+{
+  "project_info": {
+    "project_number": "560400509256",
+    "firebase_url": "https://readingowl-ff5fa-default-rtdb.firebaseio.com",
+    "project_id": "readingowl-ff5fa",
+    "storage_bucket": "readingowl-ff5fa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:560400509256:android:3ae3f8ecdf034b2c38ab7d",
+        "android_client_info": {
+          "package_name": "com.betterLabs.reading_owl"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "560400509256-pue364b3qo37hlhue6e4m2oqcrenck7o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3tEOsURXpo1KRPAKgEBPxu-K9Wk7jMVM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "560400509256-pue364b3qo37hlhue6e4m2oqcrenck7o.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "560400509256-crhr48k3uu339p1nfc9q50ivakn912pp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.readingOwl"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:560400509256:android:0ea8a95dd4d02c1038ab7d",
+        "android_client_info": {
+          "package_name": "com.example.reading_owl"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "560400509256-pue364b3qo37hlhue6e4m2oqcrenck7o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3tEOsURXpo1KRPAKgEBPxu-K9Wk7jMVM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "560400509256-pue364b3qo37hlhue6e4m2oqcrenck7o.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "560400509256-crhr48k3uu339p1nfc9q50ivakn912pp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.readingOwl"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

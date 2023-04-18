@@ -51,7 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
               TitleText(context, 'Welcome to Reading Owl'),
               Center(
                 child: Text(
-                  'Things for you to read at night.',
+                  'Read your heart out',
                   style: TextStyle(
                     color: textColor,
                     fontSize: 20,
@@ -106,16 +106,16 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ],
               ),
-              SizedBox(
-                height: 70,
-              ),
-              Text(
-                '* We are still developing and testing this app. \nPlease consider helping us improve the application by reporting errors.',
-                style: TextStyle(
-                  color: textColor,
-                  fontSize: 16,
-                ),
-              ),
+              // SizedBox(
+              //   height: 70,
+              // ),
+              // Text(
+              //   '* We are still developing and testing this app. \nPlease consider helping us improve the application by reporting errors.',
+              //   style: TextStyle(
+              //     color: textColor,
+              //     fontSize: 16,
+              //   ),
+              // ),
             ],
           ),
         ),

@@ -44,40 +44,44 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDiHyGktG7D2yaywHkILMReCQg35xQ5J1c',
-    appId: '1:172898981582:web:796cf00d4475b875c5229f',
-    messagingSenderId: '172898981582',
-    projectId: 'readingowl-v1-0',
-    authDomain: 'readingowl-v1-0.firebaseapp.com',
-    storageBucket: 'readingowl-v1-0.appspot.com',
-    measurementId: 'G-BWBQMDS2CC',
+    apiKey: 'AIzaSyDHIXoZUZVQvO65ldn-lgBZDCTcuqBNEy8',
+    appId: '1:560400509256:web:4a192d97956e808538ab7d',
+    messagingSenderId: '560400509256',
+    projectId: 'readingowl-ff5fa',
+    authDomain: 'readingowl-ff5fa.firebaseapp.com',
+    databaseURL: 'https://readingowl-ff5fa-default-rtdb.firebaseio.com',
+    storageBucket: 'readingowl-ff5fa.appspot.com',
+    measurementId: 'G-E9CVJL8JTD',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyB4CHoOJrym7-NqjDPugHUZ7Vund47NNiY',
-    appId: '1:172898981582:android:9a63b01208079435c5229f',
-    messagingSenderId: '172898981582',
-    projectId: 'readingowl-v1-0',
-    storageBucket: 'readingowl-v1-0.appspot.com',
+    apiKey: 'AIzaSyA3tEOsURXpo1KRPAKgEBPxu-K9Wk7jMVM',
+    appId: '1:560400509256:android:3ae3f8ecdf034b2c38ab7d',
+    messagingSenderId: '560400509256',
+    projectId: 'readingowl-ff5fa',
+    databaseURL: 'https://readingowl-ff5fa-default-rtdb.firebaseio.com',
+    storageBucket: 'readingowl-ff5fa.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyD9Iz7Mui_0gM60SGh9C5T3CsLCkIWCAEM',
-    appId: '1:172898981582:ios:e445bc511073708ac5229f',
-    messagingSenderId: '172898981582',
-    projectId: 'readingowl-v1-0',
-    storageBucket: 'readingowl-v1-0.appspot.com',
-    iosClientId: '172898981582-pjk7hsj3dqs82pkafivoq7semd8plt56.apps.googleusercontent.com',
+    apiKey: 'AIzaSyA75x-94jyJz1kw37t3Lm7AZ2TH63ejKDI',
+    appId: '1:560400509256:ios:38fc10655433445738ab7d',
+    messagingSenderId: '560400509256',
+    projectId: 'readingowl-ff5fa',
+    databaseURL: 'https://readingowl-ff5fa-default-rtdb.firebaseio.com',
+    storageBucket: 'readingowl-ff5fa.appspot.com',
+    iosClientId: '560400509256-crhr48k3uu339p1nfc9q50ivakn912pp.apps.googleusercontent.com',
     iosBundleId: 'com.example.readingOwl',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyD9Iz7Mui_0gM60SGh9C5T3CsLCkIWCAEM',
-    appId: '1:172898981582:ios:e445bc511073708ac5229f',
-    messagingSenderId: '172898981582',
-    projectId: 'readingowl-v1-0',
-    storageBucket: 'readingowl-v1-0.appspot.com',
-    iosClientId: '172898981582-pjk7hsj3dqs82pkafivoq7semd8plt56.apps.googleusercontent.com',
+    apiKey: 'AIzaSyA75x-94jyJz1kw37t3Lm7AZ2TH63ejKDI',
+    appId: '1:560400509256:ios:38fc10655433445738ab7d',
+    messagingSenderId: '560400509256',
+    projectId: 'readingowl-ff5fa',
+    databaseURL: 'https://readingowl-ff5fa-default-rtdb.firebaseio.com',
+    storageBucket: 'readingowl-ff5fa.appspot.com',
+    iosClientId: '560400509256-crhr48k3uu339p1nfc9q50ivakn912pp.apps.googleusercontent.com',
     iosBundleId: 'com.example.readingOwl',
   );
 }

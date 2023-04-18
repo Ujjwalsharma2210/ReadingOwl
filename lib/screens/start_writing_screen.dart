@@ -56,6 +56,12 @@ class _StartWritingScreenState extends State<StartWritingScreen> {
     final json = blog.toJson();
     await dbRef.set(json).onError(
         (error, stackTrace) => showToast(context, error.toString(), 'error'));
+    firestoreInstance
+        .collection('users')
+        .doc(firebaseAuthInstance.currentUser!.uid)
+        .update({
+      'yourBlogs': FieldValue.arrayUnion([dbRef.id])
+    });
   }
 
   @override
@@ -143,11 +149,13 @@ class _StartWritingScreenState extends State<StartWritingScreen> {
   void verifyBlog() {
     final dbRef = firestoreInstance.collection('blogs').doc();
     final blog = Blog(
-        id: dbRef.id,
-        title: titleController.text,
-        content: contentController.text,
-        author: username,
-        genre: selectedGenre);
+      id: dbRef.id,
+      title: titleController.text,
+      content: contentController.text,
+      author: username,
+      genre: selectedGenre,
+      isVerified: false,
+    );
     if (titleController.text.trim().isEmpty ||
         contentController.text.trim().isEmpty) {
       showToast(context, '''Feild(s) can't be empty''', 'alert');

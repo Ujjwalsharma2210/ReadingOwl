@@ -60,13 +60,14 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Text(
                   blog.content,
-                  style: TextStyle(color: textColor, fontSize: 19),
+                  style: TextStyle(color: textColor, fontSize: 20),
                   maxLines: 5,
                 ),
                 const Text(
                   'more',
                   style: TextStyle(
                     color: Colors.blue,
+                    fontSize: 18,
                   ),
                 ),
                 Row(
