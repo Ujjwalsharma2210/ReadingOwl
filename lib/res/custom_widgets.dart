@@ -120,8 +120,6 @@ void showToast(BuildContext context, String message, String type) {
     SnackBar(
       backgroundColor: Colors.green,
       content: Text(message),
-      action: SnackBarAction(
-          label: 'UNDO', onPressed: scaffold.hideCurrentSnackBar),
     ),
   );
 }
