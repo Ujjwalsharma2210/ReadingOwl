@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:reading_owl/screens/home_screen.dart';
 import 'package:reading_owl/screens/issue_report_screen.dart';
 import 'package:reading_owl/screens/login_screen.dart';
-import 'package:reading_owl/screens/reading_screen.dart';
 import 'package:reading_owl/screens/signup_screen.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';

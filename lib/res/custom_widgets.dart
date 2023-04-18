@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:reading_owl/res/colors.dart';
-
-double? fontSize = 16;
-
-double borderRadius = 12;
+import 'package:reading_owl/res/constants.dart';
 
 final List<String> listItems = [
   'Health',

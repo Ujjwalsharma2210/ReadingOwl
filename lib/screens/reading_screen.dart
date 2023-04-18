@@ -19,27 +19,30 @@ class ReadingScreen extends StatefulWidget {
 class _ReadingScreenState extends State<ReadingScreen> {
   var firestoreInstance = FirebaseFirestore.instance.collection('blogs');
 
-  Future<dynamic> getReads(String blogId) async {
+  Future<dynamic> updateReadsAndScore(String blogId) async {
     // ignore: prefer_typing_uninitialized_variables
     var curReads = 0;
+    var curScore = 0;
     final dbRef = firestoreInstance.doc(widget.blog.id.toString());
     await dbRef.get().then(
       (DocumentSnapshot doc) {
         final data = doc.data() as Map<String, dynamic>;
         curReads = data['reads'];
+        curScore = data['score'];
       },
       onError: (e) => showToast(context, 'Cant get blog ID', 'error'),
     );
 
     var newReads = curReads + 1;
-    await Future.delayed(const Duration(seconds: 30));
-    await dbRef.update({'reads': newReads}).catchError(
+    var newScore = curScore + 30;
+    // await Future.delayed(const Duration(seconds: 30));
+    await dbRef.update({'reads': newReads, 'score': newScore}).catchError(
         (onError) => showToast(context, onError.toString(), 'alert'));
   }
 
   @override
   void initState() {
-    getReads(widget.blog.id.toString());
+    updateReadsAndScore(widget.blog.id.toString());
     super.initState();
   }
 

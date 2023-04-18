@@ -26,6 +26,7 @@ class Blog {
         'reads': reads,
         'genre': genre,
         'isVerified': isVerified,
+        'score': score,
       };
 
   static Blog fromJson(Map<String, dynamic> json) => Blog(
@@ -36,6 +37,7 @@ class Blog {
         genre: json['genre'],
         reads: json['reads'],
         isVerified: json['isVerified'],
+        score: json['score'],
       );
 }
 

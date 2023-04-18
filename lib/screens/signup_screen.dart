@@ -4,6 +4,8 @@ import 'package:reading_owl/res/custom_widgets.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:reading_owl/res/multi_select.dart';
 
+import '../res/constants.dart';
+
 Color textColor = Colors.grey.shade500;
 
 class SignupScreen extends StatefulWidget {

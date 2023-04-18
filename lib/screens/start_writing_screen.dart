@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:reading_owl/res/constants.dart';
 import 'package:reading_owl/res/custom_widgets.dart';
 
 import '../res/data_structures.dart';
