@@ -60,7 +60,10 @@ Widget SideDrawer(BuildContext context, String email) {
               fontSize: 18,
             ),
           ),
-          onTap: () => FirebaseAuth.instance.signOut(),
+          onTap: () {
+            FirebaseAuth.instance.signOut();
+            // Navigator.pop(context);
+          },
         ),
       ],
     ),

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:reading_owl/res/custom_widgets.dart';
 
+import '../res/constants.dart';
+
 Color darkGrey = Colors.grey.shade900;
 Color textColor = Colors.grey.shade500;
 
@@ -23,7 +25,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   // TextEditingController ConfirmPasswordController = TextEditingController();
-  Future signup() async {
+  Future login() async {
     await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: emailController.text.trim(),
         password: passwordController.text.trim());
@@ -46,46 +48,48 @@ class _LoginScreenState extends State<LoginScreen> {
           child: ListView(
             children: [
               SizedBox(
-                height: height * 0.08,
+                height: height * 0.02,
               ),
-              TitleText(context, 'Welcome to Reading Owl'),
-              Center(
-                child: Text(
-                  'Read your heart out',
-                  style: TextStyle(
-                    color: textColor,
-                    fontSize: 20,
-                  ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    TitleText(context, 'Reading Owl'),
+                    OwlImage(context),
+                  ],
                 ),
               ),
+
               const SizedBox(
-                height: 30,
-              ),
-              OwlImage(context),
-              const SizedBox(
-                height: 30,
+                height: 150,
               ),
               TextInputField(context, emailController, 'Enter email'),
-              const SizedBox(
-                height: 10,
+              SizedBox(
+                height: separation,
               ),
               TextInputField(context, passwordController, 'Enter password'),
-              const SizedBox(
-                height: 10,
+              SizedBox(
+                height: separation,
               ),
               // BasicButton(buttonHandler: signup, buttonTitle: 'Signup'),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ElevatedButton(
-                  onPressed: signup,
-                  child: const Text(
-                    'Login',
-                    style: TextStyle(
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
+              Row(
+                children: [
+                  CustomButton(onPress: login, label: "Login"),
+                ],
               ),
+              // Padding(
+              //   padding: const EdgeInsets.all(8.0),
+              //   child: ElevatedButton(
+              //     onPressed: login,
+              //     child: const Text(
+              //       'Login',
+              //       style: TextStyle(
+              //         fontSize: 16,
+              //       ),
+              //     ),
+              //   ),
+              // ),
               const SizedBox(
                 height: 30,
               ),

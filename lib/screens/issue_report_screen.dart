@@ -4,6 +4,8 @@ import 'package:reading_owl/res/custom_widgets.dart';
 import 'package:reading_owl/res/data_structures.dart';
 import 'package:reading_owl/screens/start_writing_screen.dart';
 
+import '../res/constants.dart';
+
 class IssueReportScreen extends StatefulWidget {
   const IssueReportScreen({super.key});
 
@@ -44,8 +46,8 @@ class _IssueReportScreenState extends State<IssueReportScreen> {
                 fontSize: 16,
               ),
             ),
-            const SizedBox(
-              height: 10,
+            SizedBox(
+              height: separation,
             ),
             ElevatedButton(
               onPressed: () {

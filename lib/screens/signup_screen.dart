@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:reading_owl/res/custom_widgets.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:reading_owl/res/multi_select.dart';
+import 'package:email_validator/email_validator.dart';
 
 import '../res/constants.dart';
 
@@ -91,49 +92,61 @@ class _SignupScreenState extends State<SignupScreen> {
           child: ListView(
             children: [
               SizedBox(
-                height: height * 0.07,
-              ),
-              TitleText(context, 'Welcome to Reading Owl'),
-              const SizedBox(
-                height: 30,
-              ),
-              OwlImage(context),
-              const SizedBox(
-                height: 30,
-              ),
-              TextInputField(context, usernameController, 'Enter Username'),
-              const SizedBox(
-                height: 10,
-              ),
-              TextInputField(context, emailController, 'Enter Email'),
-              const SizedBox(
-                height: 10,
-              ),
-              TextInputField(context, passwordController, 'Enter password'),
-              const SizedBox(
-                height: 10,
-              ),
-              TextInputField(
-                  context, confirmPasswordController, 'Confirm password'),
-              const SizedBox(
-                height: 10,
+                height: height * 0.02,
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ElevatedButton(
-                  onPressed: showMultiSelect,
-                  child: Text(
-                    'Select your interests',
-                    style: TextStyle(
-                      fontSize: fontSize,
-                    ),
-                  ),
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    TitleText(context, 'Reading Owl'),
+                    OwlImage(context),
+                  ],
                 ),
+              ),
+
+              const SizedBox(
+                height: 150,
+              ),
+              TextInputField(context, usernameController, 'Enter Username'),
+              SizedBox(
+                height: separation,
+              ),
+              TextInputField(context, emailController, 'Enter Email'),
+              SizedBox(
+                height: separation,
+              ),
+              TextInputField(context, passwordController, 'Enter password'),
+              SizedBox(
+                height: separation,
+              ),
+              // TextInputField(
+              //     context, confirmPasswordController, 'Confirm password'),
+              // const SizedBox(
+              //   height: 10,
+              // ),
+              Row(
+                // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  CustomButton(
+                    onPress: showMultiSelect,
+                    label: "Select interests",
+                  ),
+                  SizedBox(width: separation),
+                  CustomButton(
+                    onPress: verifyCredentials,
+                    label: "Signup",
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: separation,
               ),
               Wrap(
                 children: selectedItems
                     .map((e) => Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 5, vertical: 1),
                           child: Chip(
                             backgroundColor: Colors.grey.shade900,
                             label: Text(
@@ -146,22 +159,8 @@ class _SignupScreenState extends State<SignupScreen> {
                         ))
                     .toList(),
               ),
-              const SizedBox(
-                height: 10,
-              ),
+
               // BasicButton(buttonHandler: signup, buttonTitle: 'Signup'),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ElevatedButton(
-                  onPressed: verifyCredentials,
-                  child: Text(
-                    'Signup',
-                    style: TextStyle(
-                      fontSize: fontSize,
-                    ),
-                  ),
-                ),
-              ),
             ],
           ),
         ),
@@ -170,20 +169,23 @@ class _SignupScreenState extends State<SignupScreen> {
   }
 
   void verifyCredentials() {
-    if (confirmPasswordController.text.trim() == '' ||
+    if (usernameController.text.trim() == '' ||
         emailController.text.trim() == '' ||
         passwordController.text.trim() == '' ||
-        confirmPasswordController.text.trim() == '' ||
+        // confirmPasswordController.text.trim() == '' ||
         selectedItems.isEmpty) {
       showToast(context, '''Field(s) can't be empty''', 'alert');
-      return;
-    } else if (passwordController.text.trim() !=
-        confirmPasswordController.text.toString()) {
-      showToast(context, '''passwords don't match''', 'alert');
-      return;
+      // return;
+      // } else if (passwordController.text.trim() !=
+      //     confirmPasswordController.text.toString()) {
+      //   showToast(context, '''passwords don't match''', 'alert');
+      //   return;
     } else if (passwordController.text.trim().length < 6) {
       showToast(context, 'password too short', 'alert');
-      return;
+      // return;
+    } else if (!EmailValidator.validate(emailController.text)) {
+      showToast(context, "Invalid email", 'alert');
+      // return;
     } else {
       signup();
     }

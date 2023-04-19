@@ -28,7 +28,7 @@ Widget OwlImage(BuildContext context) {
   return Container(
     child: Image.asset(
       'assets/owl.png',
-      height: 150,
+      height: 50,
     ),
   );
 }
@@ -67,37 +67,42 @@ Widget TextInputField(
     BuildContext context, TextEditingController controller, String hintText) {
   Color textColor = Colors.grey.shade500;
 
-  return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      child: Container(
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(borderRadius), color: darkGrey),
-        child: TextField(
-          minLines: 1,
-          maxLines: 15,
-          controller: controller,
-          style: TextStyle(color: textColor),
-          decoration: InputDecoration(
-            border: const OutlineInputBorder(),
-            hintText: hintText,
-            hintStyle: TextStyle(color: textColor, fontSize: 16),
+  return TextField(
+    minLines: 1,
+    maxLines: 15,
+    controller: controller,
+    style: TextStyle(color: textColor, fontSize: 16),
+    decoration: InputDecoration(
+      fillColor: darkGrey,
+      filled: true,
+      // border: InputBorder.none,
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(borderRadius),
+        borderSide: BorderSide(color: Colors.grey, width: 1),
+      ),
+      label: Padding(
+        padding: EdgeInsets.all(8.0),
+        child: Text(
+          hintText,
+          style: TextStyle(
+            color: textColor,
           ),
         ),
-      ));
+      ),
+      hintStyle: TextStyle(color: textColor, fontSize: 16),
+    ),
+  );
 }
 
 Widget TitleText(BuildContext context, String pageHeading) {
   Color grey = Colors.grey.shade500;
   return Center(
-    child: Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Text(
-        pageHeading,
-        style: TextStyle(
-          color: grey,
-          fontSize: 38,
-          fontWeight: FontWeight.w600,
-        ),
+    child: Text(
+      pageHeading,
+      style: TextStyle(
+        color: grey,
+        fontSize: 38,
+        fontWeight: FontWeight.w600,
       ),
     ),
   );
@@ -122,4 +127,34 @@ void showToast(BuildContext context, String message, String type) {
       content: Text(message),
     ),
   );
+}
+
+class CustomButton extends StatelessWidget {
+  void Function()? onPress;
+  String label;
+  CustomButton({super.key, required this.onPress, required this.label});
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      flex: 1,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(borderRadius),
+          ),
+        ),
+        onPressed: onPress,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 15),
+          child: Text(
+            label,
+            style: TextStyle(
+              fontSize: buttonFontSize,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 }

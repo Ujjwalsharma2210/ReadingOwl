@@ -41,6 +41,8 @@ class _HomePageState extends State<HomePage> {
         } else if (snapshot.hasData) {
           final blogs = snapshot.data;
 
+          // If a blog becomes visible and inivisible and is not
+          // clicked => reduce score by n
           return ListView(
             // children: blogs!.map(BlogWidget).toList(),
             children: blogs!
