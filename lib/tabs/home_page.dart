@@ -23,6 +23,8 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     Stream<List<Blog>> readBlogs() => FirebaseFirestore.instance
         .collection('blogs')
+        .orderBy('score', descending: true) // Sort blogs by score
+        .limit(15)
         .snapshots()
         .map((snapshot) =>
             snapshot.docs.map((e) => Blog.fromJson(e.data())).toList());
