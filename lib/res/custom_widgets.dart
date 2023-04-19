@@ -123,7 +123,7 @@ void showToast(BuildContext context, String message, String type) {
   final scaffold = ScaffoldMessenger.of(context);
   scaffold.showSnackBar(
     SnackBar(
-      backgroundColor: Colors.green,
+      backgroundColor: bgColor,
       content: Text(message),
     ),
   );

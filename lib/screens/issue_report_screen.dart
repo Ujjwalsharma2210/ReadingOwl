@@ -4,6 +4,7 @@ import 'package:reading_owl/res/custom_widgets.dart';
 import 'package:reading_owl/res/data_structures.dart';
 import 'package:reading_owl/screens/start_writing_screen.dart';
 
+import '../res/colors.dart';
 import '../res/constants.dart';
 
 class IssueReportScreen extends StatefulWidget {

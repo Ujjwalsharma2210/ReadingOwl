@@ -4,14 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:reading_owl/res/constants.dart';
 import 'package:reading_owl/res/custom_widgets.dart';
 
+import '../res/colors.dart';
 import '../res/data_structures.dart';
-
-Color black = Colors.black;
-Color darkGrey = Colors.grey.shade900;
-Color textColor = Colors.grey.shade500;
-Color primaryColor = Colors.deepPurple;
-Color grey = Colors.grey.shade800;
-Color white = Colors.white;
 
 class StartWritingScreen extends StatefulWidget {
   const StartWritingScreen({super.key});
@@ -75,76 +69,92 @@ class _StartWritingScreenState extends State<StartWritingScreen> {
           children: [
             TitleText(context, 'Publish your story'),
             const SizedBox(
-              height: 70,
+              height: 150,
             ),
             TextInputField(context, titleController, 'Enter title'),
-            TextInputField(context, contentController, 'Enter content'),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(borderRadius),
-                  color: darkGrey,
-                ),
-                child: DropdownButton(
-                  hint: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      selectGenreHint,
-                      style: TextStyle(color: textColor, fontSize: fontSize),
-                    ),
-                  ),
-                  dropdownColor: darkGrey,
-                  icon: const Icon(Icons.keyboard_arrow_down),
-                  underline: const SizedBox(),
-                  items: listItems.map((String items) {
-                    return DropdownMenuItem(
-                      value: items,
-                      child: Text(
-                        items,
-                        style: TextStyle(
-                          color: textColor,
-                        ),
-                      ),
-                    );
-                  }).toList(),
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      selectedGenre = newValue!;
-                      selectGenreHint = newValue;
-                    });
-                  },
-                ),
-              ),
+            SizedBox(
+              height: separation,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-              child: ElevatedButton(
-                child: const Padding(
-                  padding: EdgeInsets.all(10.0),
+            TextInputField(context, contentController, 'Enter content'),
+            SizedBox(
+              height: separation,
+            ),
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(borderRadius),
+                color: darkGrey,
+              ),
+              child: DropdownButton(
+                hint: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: Text(
-                    'Send for review',
+                    selectGenreHint,
                     style: TextStyle(
-                      fontSize: 16,
+                      color: textColor,
+                      fontSize: fontSize,
                     ),
                   ),
                 ),
-                onPressed: () {
-                  // createBlog(blog);
-                  verifyBlog();
-                  titleController.clear;
-                  contentController.clear;
-
-                  showToast(
-                      context, 'Sent for review suuccessfully.', 'success');
-                  Navigator.pop(context);
+                dropdownColor: darkGrey,
+                icon: const Icon(Icons.keyboard_arrow_down),
+                underline: const SizedBox(),
+                items: listItems.map((String items) {
+                  return DropdownMenuItem(
+                    value: items,
+                    child: Text(
+                      items,
+                      style: TextStyle(
+                        color: textColor,
+                      ),
+                    ),
+                  );
+                }).toList(),
+                onChanged: (String? newValue) {
+                  setState(() {
+                    selectedGenre = newValue!;
+                    selectGenreHint = newValue;
+                  });
                 },
               ),
             ),
+            SizedBox(
+              height: separation,
+            ),
+            CustomButton(onPress: sendForReview, label: "Send for review"),
+            // Padding(
+            //   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            //   child: ElevatedButton(
+            //     child: const Padding(
+            //       padding: EdgeInsets.all(10.0),
+            //       child: Text(
+            //         'Send for review',
+            //         style: TextStyle(
+            //           fontSize: 16,
+            //         ),
+            //       ),
+            //     ),
+            //     onPressed: () {
+            //       // createBlog(blog);
+            //       sendForReview();
+            //     },
+            //   ),
+            // ),
           ],
         ),
       ),
     );
+  }
+
+  void sendForReview() {
+    try {
+      verifyBlog();
+      titleController.clear;
+      contentController.clear;
+      showToast(context, 'Sent for review successfully.', 'success');
+      Navigator.pop(context);
+    } catch (e) {
+      showToast(context, 'Something went wrong.', 'alert');
+    }
   }
 
   void verifyBlog() {
@@ -158,12 +168,13 @@ class _StartWritingScreenState extends State<StartWritingScreen> {
       isVerified: false,
     );
     if (titleController.text.trim().isEmpty ||
-        contentController.text.trim().isEmpty) {
+        contentController.text.trim().isEmpty ||
+        selectedGenre.trim().isEmpty) {
       showToast(context, '''Feild(s) can't be empty''', 'alert');
-    } else if (selectedGenre == '') {
-      showToast(context, 'Select a genre', 'alert');
+      return;
     } else {
       createBlog(blog, dbRef);
+      return;
     }
   }
 }
