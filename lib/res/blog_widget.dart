@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:reading_owl/res/constants.dart';
 
+import '../data_structures/blog.dart';
 import '../screens/reading_screen.dart';
 import 'colors.dart';
-import 'data_structures.dart';
 
 class BlogWidget extends StatelessWidget {
   Blog blog;

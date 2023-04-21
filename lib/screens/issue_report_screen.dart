@@ -1,9 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:reading_owl/res/custom_widgets.dart';
-import 'package:reading_owl/res/data_structures.dart';
-import 'package:reading_owl/screens/start_writing_screen.dart';
 
+import '../data_structures/Issue.dart';
 import '../res/colors.dart';
 import '../res/constants.dart';
 
@@ -35,9 +34,13 @@ class _IssueReportScreenState extends State<IssueReportScreen> {
         padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
-            TitleText(context, 'Report bug or make suggestions'),
-            SizedBox(
-              height: height,
+            const SizedBox(
+              height: 100,
+            ),
+            TitleText(
+                context, 'Report problems, \nshare suggestions anonymously'),
+            const SizedBox(
+              height: 100,
             ),
             TextInputField(context, issueController, 'What is the issue?'),
             Text(

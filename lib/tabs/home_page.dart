@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import '../data_structures/blog.dart';
 import '../res/blog_widget.dart';
-import '../res/data_structures.dart';
 
 import 'package:reading_owl/res/colors.dart';
 
@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> {
     Stream<List<Blog>> readBlogs() => FirebaseFirestore.instance
         .collection('blogs')
         .orderBy('score', descending: true) // Sort blogs by score
-        .limit(15)
+        .limit(25)
         .snapshots()
         .map((snapshot) =>
             snapshot.docs.map((e) => Blog.fromJson(e.data())).toList());

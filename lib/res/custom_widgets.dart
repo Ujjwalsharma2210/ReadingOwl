@@ -136,22 +136,19 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      flex: 1,
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(borderRadius),
-          ),
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(borderRadius),
         ),
-        onPressed: onPress,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 15),
-          child: Text(
-            label,
-            style: TextStyle(
-              fontSize: buttonFontSize,
-            ),
+      ),
+      onPressed: onPress,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 15),
+        child: Text(
+          label,
+          style: TextStyle(
+            fontSize: buttonFontSize,
           ),
         ),
       ),

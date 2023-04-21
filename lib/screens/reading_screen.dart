@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
+import '../data_structures/blog.dart';
 import '../res/custom_widgets.dart';
-import '../res/data_structures.dart';
 import 'package:reading_owl/res/colors.dart';
 
 class ReadingScreen extends StatefulWidget {

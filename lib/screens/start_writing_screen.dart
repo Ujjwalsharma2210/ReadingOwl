@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:reading_owl/res/constants.dart';
 import 'package:reading_owl/res/custom_widgets.dart';
 
+import '../data_structures/blog.dart';
 import '../res/colors.dart';
-import '../res/data_structures.dart';
 
 class StartWritingScreen extends StatefulWidget {
   const StartWritingScreen({super.key});
@@ -45,25 +45,20 @@ class _StartWritingScreenState extends State<StartWritingScreen> {
     );
   }
 
-  Future createBlog(Blog blog, var dbRef) async {
-    // FirebaseFirestore.instance.collection('unReviewedBlogs').doc(FirebaseAuth.instance.currentUser.toString());
-
-    final json = blog.toJson();
-    await dbRef.set(json).onError(
-        (error, stackTrace) => showToast(context, error.toString(), 'error'));
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
       body: Padding(
         padding: const EdgeInsets.all(20),
-        child: ListView(
+        child: Column(
           children: [
+            const SizedBox(
+              height: 100,
+            ),
             TitleText(context, 'Publish your story'),
             const SizedBox(
-              height: 150,
+              height: 100,
             ),
             TextInputField(context, titleController, 'Enter title'),
             SizedBox(
@@ -168,13 +163,30 @@ class _StartWritingScreenState extends State<StartWritingScreen> {
       return;
     } else {
       createBlog(blog, dbRef);
-      addBlogToUser(blog.id, dbRef);
+      addBlogToUser(blog, dbRef);
       return;
     }
   }
 
-  void addBlogToUser(String id, var dbRef) {
-    firestoreInstance
+  Future createBlog(Blog blog, var dbRef) async {
+    // FirebaseFirestore.instance.collection('unReviewedBlogs').doc(FirebaseAuth.instance.currentUser.toString());
+
+    final json = blog.toJson();
+    await dbRef.set(json).onError(
+        (error, stackTrace) => showToast(context, error.toString(), 'error'));
+  }
+
+  Future addBlogToUser(Blog blog, var dbRef) async {
+    // final json = blog.toJson();
+
+    // await firestoreInstance
+    //     .collection('users')
+    //     .doc(firebaseAuthInstance.currentUser!.uid)
+    //     .update({
+    //   'yourBlogs': FieldValue.arrayUnion([json])
+    // });
+
+    await firestoreInstance
         .collection('users')
         .doc(firebaseAuthInstance.currentUser!.uid)
         .update({

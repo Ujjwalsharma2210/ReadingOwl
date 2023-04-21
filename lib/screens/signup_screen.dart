@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:reading_owl/data_structures/user.dart' as User;
 import 'package:reading_owl/res/custom_widgets.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:reading_owl/res/multi_select.dart';
@@ -37,13 +38,18 @@ class _SignupScreenState extends State<SignupScreen> {
     final dbRef = FirebaseFirestore.instance
         .collection('users')
         .doc(FirebaseAuth.instance.currentUser!.uid.toString());
-    final json = {
-      'username': usernameController.text.trim(),
-      'email': emailController.text.trim(),
-      'isVerifiedWriter': false,
-      'interests': selectedItems,
-      'yourBlogs': [],
-    };
+    // final json = {
+    //   'username': usernameController.text.trim(),
+    //   'email': emailController.text.trim(),
+    //   'isVerifiedWriter': false,
+    //   'interests': selectedItems,
+    //   'yourBlogs': [],
+    // };
+    final user = User.User(
+        username: usernameController.text.trim(),
+        email: emailController.text.trim(),
+        interests: selectedItems);
+    final json = user.toJson();
 
     await dbRef.set(json);
   }
