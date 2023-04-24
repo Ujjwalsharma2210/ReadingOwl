@@ -74,6 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               // BasicButton(buttonHandler: signup, buttonTitle: 'Signup'),
               Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   CustomButton(onPress: login, label: "Login"),
                 ],

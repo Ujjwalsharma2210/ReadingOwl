@@ -132,13 +132,13 @@ class _SignupScreenState extends State<SignupScreen> {
               //   height: 10,
               // ),
               Row(
-                // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  CustomButton(
-                    onPress: showMultiSelect,
-                    label: "Select interests",
-                  ),
-                  SizedBox(width: separation),
+                  // CustomButton(
+                  //   onPress: showMultiSelect,
+                  //   label: "Select interests",
+                  // ),
+                  // SizedBox(width: separation),
                   CustomButton(
                     onPress: verifyCredentials,
                     label: "Signup",

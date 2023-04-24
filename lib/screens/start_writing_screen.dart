@@ -149,6 +149,8 @@ class _StartWritingScreenState extends State<StartWritingScreen> {
   void verifyBlog() {
     final dbRef = firestoreInstance.collection('blogs').doc();
     final blog = Blog(
+      reads: 0,
+      score: 1400,
       id: dbRef.id,
       title: titleController.text,
       content: contentController.text,

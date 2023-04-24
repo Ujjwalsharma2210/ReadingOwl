@@ -1,22 +1,22 @@
 class Blog {
-  final String id;
+  String id;
   int reads;
-  final String title;
-  final String content;
-  final String author;
-  final String genre;
-  var isVerified = false;
+  String title;
+  String content;
+  String author;
+  String genre;
+  var isVerified;
   int score;
 
   Blog(
       {required this.id,
-      this.reads = 0,
+      required this.reads,
       required this.title,
       required this.content,
       required this.author,
       required this.genre,
       required this.isVerified,
-      this.score = 1400});
+      required this.score});
 
   Map<String, dynamic> toJson() => {
         'id': id,
