@@ -15,7 +15,7 @@ class YourStories extends StatefulWidget {
 
 class _YourStoriesState extends State<YourStories> {
   List<String> usersBlogIds = <String>[];
-  late List<Widget> usersBlogsList;
+  List<Blog> usersBlogsList = <Blog>[];
   // List<BlogWidget> blogs = <BlogWidget>[];
 
   var _firestore = FirebaseFirestore.instance;
@@ -25,6 +25,13 @@ class _YourStoriesState extends State<YourStories> {
   Widget build(BuildContext context) {
     return ListView(
       children: [
+        Text(
+          "Your Blogs",
+          style: TextStyle(
+            color: textColor,
+            fontSize: 22,
+          ),
+        ),
         createUserBlogsList(),
       ],
     );
@@ -32,7 +39,7 @@ class _YourStoriesState extends State<YourStories> {
 
   @override
   void initState() {
-    getBlogs();
+    getUsersBlogIds();
 
     super.initState();
   }
@@ -45,38 +52,27 @@ class _YourStoriesState extends State<YourStories> {
         .then((value) {
       usersBlogIds = List<String>.from(value.data()!['yourBlogs']);
     });
-    createUserBlogsList();
+    getBlogs();
   }
 
   void getBlogs() async {
     usersBlogsList = await fetchUserBlogsList();
-    // setState(() {});
   }
 
   Widget createUserBlogsList() {
-    if (usersBlogsList.isEmpty) {
-      return Text(
-        "You have not written anything yet",
-        style: TextStyle(color: textColor, fontSize: 22),
-      );
-    } else if (usersBlogsList.isNotEmpty) {
-      return Column(
-        children: usersBlogsList,
-      );
-    } else {
-      return const Center(child: CircularProgressIndicator());
+    List<Widget> listOfBlogWidget = <Widget>[];
+    for (var blog in usersBlogsList) {
+      listOfBlogWidget.add(BlogWidget(blog: blog));
     }
-
-    // return ListView.builder(
-    //   itemCount: usersBlogsList.length,
-    //   itemBuilder: (context, index) {
-    //     return BlogWidget(blog: usersBlogsList[index]);
-    //   },
-    // );
+    setState(() {});
+    return Column(
+      children: listOfBlogWidget,
+    );
   }
 
-  List<Widget> fetchUserBlogsList() {
-    List<Widget> usersBlogsList = <Widget>[];
+  Future<List<Blog>> fetchUserBlogsList() async {
+    // List<Widget> usersBlogsList = <Widget>[];
+    final List<Blog> blogs = <Blog>[];
     Map<String, dynamic>? data;
     for (String blogId in usersBlogIds) {
       var userBlogDoc = _firestore.collection('blogs').doc(blogId);
@@ -92,15 +88,15 @@ class _YourStoriesState extends State<YourStories> {
               isVerified: data!['isVerified'],
               reads: data!['reads'],
               score: data!['score']);
-          usersBlogsList.add(BlogWidget(blog: usersBlog));
-          print(data!['title']);
+          blogs.add(usersBlog);
+          print(usersBlog.reads.toString() + " " + usersBlog.id);
           // setState(() {});
         }
       }).catchError((error) {
-        print("can't get user blogs");
+        print("can't get user blogs \n $error");
       });
     }
-
-    return usersBlogsList;
+    // print(usersBlogIds);
+    return blogs;
   }
 }
